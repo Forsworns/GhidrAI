@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GHIDRAI_CONFIG>
+    <STATE NAME="SERVICE_PROVIDER" TYPE="string" VALUE="DashScope" />
+    <STATE NAME="MODEL_NAME" TYPE="string" VALUE="qwen-max" />
+    <STATE NAME="API_KEY" TYPE="string" VALUE="DashScope_must_set_env" />
+    <STATE NAME="RETRY_TIMES" TYPE="int" VALUE="3" />
+    <STATE NAME="ENABLE_DECOMPILE" TYPE="boolean" VALUE="true" />
+    <STATE NAME="DECOMPILE_TIMEOUT" TYPE="int" VALUE="30" />
+    <ARRAY NAME="DashScope" TYPE="string">
+        <A VALUE="qwen-max" />
+        <A VALUE="qwen-max-longcontext" />
+        <A VALUE="qwen-72b-chat" />
+        <A VALUE="baichuan-7b-v1" />
+        <A VALUE="llama2-7b-chat-v2" />
+        <A VALUE="llama2-13b-chat-v2" />
+        <A VALUE="chatglm3-6b" />
+    </ARRAY>
+</GHIDRAI_CONFIG>
+
