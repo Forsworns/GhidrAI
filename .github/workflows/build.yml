@@ -38,9 +38,7 @@ jobs:
       run: gradle -PGHIDRA_INSTALL_DIR=${{ github.workspace }}/../tmp/ghidra/ghidra_PUBLIC
     - name: Configure and zip
       run: |
-        mv ./dist/$(ls ./dist) ./dist/${{ env.zip_name }}
-        cp ./util/* ./dist
-        (cd ./dist && zip -r ../${{ env.zip_name }} .)
+        mv ./dist/$(ls ./dist) ./${{ env.zip_name }}
     - name: Upload ${{ env.zip_name }} to GH Release
       uses: svenstaro/upload-release-action@2728235f7dc9ff598bd86ce3c274b74f802d2208 # v2
       with:
