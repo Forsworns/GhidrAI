@@ -18,7 +18,7 @@ public class GhidraiAgent {
     // here we can safely assume that only a single request will be handled in an
     // agent, because we use `TaskLauncher.launchModal` in `GhidraiActions`,
     // no need to consider cocurrent problems.
-    public ServiceInterface serviceProvider = null;
+    private ServiceInterface serviceProvider = null;
     private Gson gson = null;
     Type NamesMapType = new TypeToken<Map<String, String>>() {}.getType();
 
@@ -42,6 +42,10 @@ public class GhidraiAgent {
     public GhidraiAgent() {
         setupServiceProvider();
         gson = new Gson();
+    }
+
+    public boolean isServiceProviderNull() {
+        return serviceProvider == null;
     }
 
     public void setupServiceProvider() {

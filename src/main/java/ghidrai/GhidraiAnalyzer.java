@@ -22,21 +22,17 @@ import ghidrai.services.GhidraiAgent;
 /**
  * The anaylzer plugin to enable global analysis.
  */
-public class GhidraiAnaylzer extends AbstractAnalyzer {
+public class GhidraiAnalyzer extends AbstractAnalyzer {
     private static final String NAME = "GhidrAI";
     private static final String DESCRIPTION = "AI assisted analysis";
-    private static final String OPTION_NAME_GHIDRAI = "Enable GhidrAI analysis";
-    private static final String OPTION_DESCRIPTION_GHIDRAI =
-            "This may be very time-consuming! LLM service will be requested for each function.";
     private static final String OPTION_NAME_DECOMPILE = "Decompile before analysis";
     private static final String OPTION_DESCRIPTION_DECOMPILE =
             "Decompile before requests LLM services. It helps the LLM analyzes program but further increasing time cost.";
 
     private GhidraiAgent agent = null;
-    private boolean ghidraiEnabled = false;
     private boolean decompileEnabled = false;
 
-    public GhidraiAnaylzer() {
+    public GhidraiAnalyzer() {
         super(NAME, DESCRIPTION, AnalyzerType.FUNCTION_SIGNATURES_ANALYZER);
         // we want to revise the signature after the `FUNCTION_ANALYSIS`, before the
         // `DATA_TYPE_PROPOGATION`
@@ -49,19 +45,17 @@ public class GhidraiAnaylzer extends AbstractAnalyzer {
 
     @Override
     public boolean canAnalyze(Program program) {
-        Msg.debug(this, program.getExecutableFormat());
-        return true;
-        /*
-         * if (!"ELF".equals(program.getExecutableFormat())) { return false; } return agent != null;
-         */
+        return agent != null;
     }
 
     @Override
     public boolean added(Program program, AddressSetView set, TaskMonitor monitor, MessageLog log)
             throws CancelledException {
-
-        // If the database hasn't yet been opened, we'll open it
         if (this.agent == null) {
+            return false;
+        }
+        this.agent.setupServiceProvider();
+        if (this.agent.isServiceProviderNull()) {
             return false;
         }
 
@@ -105,8 +99,6 @@ public class GhidraiAnaylzer extends AbstractAnalyzer {
 
     @Override
     public void registerOptions(Options options, Program program) {
-        options.registerOption(OPTION_NAME_GHIDRAI, ghidraiEnabled, null,
-                OPTION_DESCRIPTION_GHIDRAI);
         decompileEnabled = GhidraiConfig.getEnableDecompile();
         options.registerOption(OPTION_NAME_DECOMPILE, decompileEnabled, null,
                 OPTION_DESCRIPTION_DECOMPILE);
@@ -114,7 +106,6 @@ public class GhidraiAnaylzer extends AbstractAnalyzer {
 
     @Override
     public void optionsChanged(Options options, Program program) {
-        ghidraiEnabled = options.getBoolean(OPTION_NAME_GHIDRAI, ghidraiEnabled);
         decompileEnabled = options.getBoolean(OPTION_NAME_DECOMPILE, decompileEnabled);
         GhidraiConfig.setEnableDecompile(decompileEnabled);
         GhidraiConfig.save();
