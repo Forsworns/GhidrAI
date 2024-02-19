@@ -49,6 +49,12 @@ Click `Tools > GhidrAI`, and you can find the configruation dialog. For more det
 
 ![Configuration dialog.](data/config.png)
 
+GhidrAI also provides an automatic analyzer, you can find it in `Analysis > Auto Analyze ...` or `Analysis > One Shot`.
+
+![Automatic analyzer](data/analyzers.png)
+
+![One shot analysis](data/oneshot.png)
+
 ## Acknowledgment
 
 This project refers to the [Ghidrathon](https://github.com/mandiant/Ghidrathon) plugin, which provides out-of-box Python3 integrations for Ghidra. My original idea is to utilize Ghidrathon to run LLMs locally. But directly requesting services such as [Alibaba Cloud DashScope][AliyunURL] saves my time.
