@@ -116,6 +116,11 @@ public class GhidraiAgent {
         times = 0;
         while (times < GhidraiConfig.getRetryTimes()) {
             try {
+                int start = namesJson.indexOf('{');
+                int end = namesJson.lastIndexOf('}');
+                if (start != -1 && end != -1 && end > start) {
+                    namesJson = namesJson.substring(start, end + 1);
+                }
                 names = gson.fromJson(namesJson, NamesMapType);
                 return names;
             } catch (Exception e1) {
