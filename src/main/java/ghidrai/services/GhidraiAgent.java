@@ -57,6 +57,8 @@ public class GhidraiAgent {
             try {
                 serviceProvider = (ServiceInterface) spCls.getDeclaredConstructor().newInstance();
                 spMap.put(spKey, serviceProvider);
+                Msg.debug(this,
+                        String.format("Succeed to initialize service provider, %s", spKey));
             } catch (Exception e) {
                 Msg.error(this,
                         String.format("Failed to initialize service provider, %s", e.getMessage()));
@@ -67,6 +69,7 @@ public class GhidraiAgent {
     public String explainFunction(String body) {
         setupServiceProvider();
         if (serviceProvider == null) {
+            Msg.error(this, "explainFunction: No service provider is set");
             return null;
         }
         int times = 0;
@@ -85,6 +88,7 @@ public class GhidraiAgent {
     public Map<String, String> renameFunction(String body) {
         setupServiceProvider();
         if (serviceProvider == null) {
+            Msg.error(this, "explainFunction: No service provider is set");
             return null;
         }
         int times = 0;

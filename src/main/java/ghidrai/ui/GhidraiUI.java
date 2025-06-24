@@ -17,6 +17,7 @@ import ghidra.program.model.listing.Program;
 import ghidra.program.util.ProgramSelection;
 import ghidra.util.HelpLocation;
 import ghidra.util.task.TaskLauncher;
+import ghidra.util.Msg;
 
 import ghidrai.GhidraiPlugin;
 import ghidrai.GhidraiUtils;
@@ -93,6 +94,7 @@ public class GhidraiUI implements ProgramChangeListener {
         TaskLauncher.launchModal("GhidrAI request rename...", () -> {
             Function function = getSelectedFunction();
             if (function == null) {
+                Msg.error(this, "renameFunction: No function is selected");
                 return;
             }
             DecompiledFunction decompiledFunc =
@@ -110,6 +112,7 @@ public class GhidraiUI implements ProgramChangeListener {
         TaskLauncher.launchModal("GhidrAI request explain...", () -> {
             Function function = getSelectedFunction();
             if (function == null) {
+                Msg.error(this, "explainFunction: No function is selected");
                 return;
             }
             DecompiledFunction decompiledFunc =
