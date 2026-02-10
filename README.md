@@ -2,6 +2,8 @@
 
 [![License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE.txt)
 
+# Recently Ghidra just released their supports for python3 with [PyGhidra](https://github.com/NationalSecurityAgency/ghidra/blob/master/Ghidra/Features/PyGhidra/README.md). Then the [pyghidra-mcp](https://github.com/clearbluejar/pyghidra-mcp) works well with tools such as claude code. Now AI can read our documents, write PyGhidra scripts, integrate it into the mcp server, and generate the skills automatically. This project should be archived...
+
 GhidrAI is a Ghidra extension which uses [Alibaba Cloud LLM][AliyunURL] services explain what a function does, and to automatically rename its variables. Most importantly, these services are free :)
 
 ## Requirements
